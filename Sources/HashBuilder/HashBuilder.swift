@@ -18,82 +18,82 @@
  SOFTWARE.
  */
 
-class HashBuilder {
+public class HashBuilder {
     
     var result: Int
     var constant: Int
     
-    var calculatedHash: Int {
+    public var calculatedHash: Int {
         return result
     }
     
-    init() {
+    public init() {
         // Initial prime values for hash and constant
         result = 17
         constant = 31
     }
     
-    func appendValue<T: FixedWidthInteger>(_ value: T) {
+    public func appendValue<T: FixedWidthInteger>(_ value: T) {
         result = result.multipliedReportingOverflow(by: constant).partialValue
             .addingReportingOverflow(Int(truncatingIfNeeded:value)).partialValue
     }
 
-    func appendValue(_ value: Float) {
+    public func appendValue(_ value: Float) {
         result = result.multipliedReportingOverflow(by: constant).partialValue
             .addingReportingOverflow(Int(truncatingIfNeeded:value.bitPattern)).partialValue
     }
     
-    func appendValue(_ value: Double) {
+    public func appendValue(_ value: Double) {
         result = result.multipliedReportingOverflow(by: constant).partialValue
             .addingReportingOverflow(Int(truncatingIfNeeded:value.bitPattern)).partialValue
     }
     
-    func appendValue(_ value: Bool) {
+    public func appendValue(_ value: Bool) {
         result = result.multipliedReportingOverflow(by: constant).partialValue
             .addingReportingOverflow(Int(truncatingIfNeeded:value ? 1 : 0)).partialValue
     }
     
-    func appendValue<T: Hashable>(_ value: T) {
+    public func appendValue<T: Hashable>(_ value: T) {
         result = result.multipliedReportingOverflow(by: constant).partialValue
             .addingReportingOverflow(value.hashValue).partialValue
     }
     
-    func appendValue(_ value: AnyObject) {
+    public func appendValue(_ value: AnyObject) {
         result = result.multipliedReportingOverflow(by: constant).partialValue
             .addingReportingOverflow(ObjectIdentifier(value).hashValue).partialValue
     }
     
-    func appendValue<T: FixedWidthInteger>(_ array: [T]) {
+    public func appendValue<T: FixedWidthInteger>(_ array: [T]) {
         for value in array {
             self.appendValue(value)
         }
     }
     
-    func appendValue(_ array: [Float]) {
+    public func appendValue(_ array: [Float]) {
         for value in array {
             self.appendValue(value)
         }
     }
     
-    func appendValue(_ array: [Double]) {
+    public func appendValue(_ array: [Double]) {
         for value in array {
             self.appendValue(value)
         }
     }
     
-    func appendValue(_ array: [Bool]) {
+    public func appendValue(_ array: [Bool]) {
         for value in array {
             self.appendValue(value)
         }
     }
     
-    func appendValue<T: Hashable>(_ array: [T]) {
+    public func appendValue<T: Hashable>(_ array: [T]) {
         for value in array {
             self.appendValue(value)
         }
     }
     
-    func appendValue(_ array: [AnyObject]) {
+    public func appendValue(_ array: [AnyObject]) {
         for value in array {
             self.appendValue(value)
         }
